@@ -29,7 +29,7 @@ export async function GET(req: NextRequest) {
   const usersAtRisk = new Map<string, { goalTitles: string[]; streak: number }>()
 
   for (const goal of goals) {
-    const checkIns = (goal.check_ins ?? []) as { checked_in_at: string }[]
+    const checkIns = (goal.check_ins ?? []) as any[]
     const streak = calculateStreak(checkIns)
     if (!streak.atRisk || streak.current === 0) continue
 
