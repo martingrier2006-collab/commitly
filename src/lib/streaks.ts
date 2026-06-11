@@ -1,7 +1,7 @@
 import { CheckIn, StreakInfo } from '@/types'
 import { differenceInCalendarDays, parseISO, startOfDay } from 'date-fns'
 
-export function calculateStreak(checkIns: CheckIn[]): StreakInfo {
+export function calculateStreak(checkIns: Pick<CheckIn, 'checked_in_at'>[]): StreakInfo {
   if (!checkIns.length) {
     return { current: 0, longest: 0, atRisk: false }
   }
@@ -51,7 +51,7 @@ export function calculateStreak(checkIns: CheckIn[]): StreakInfo {
   return { current, longest, atRisk }
 }
 
-export function getStreakCalendar(checkIns: CheckIn[], days = 30): Map<string, boolean> {
+export function getStreakCalendar(checkIns: Pick<CheckIn, 'checked_in_at'>[], days = 30): Map<string, boolean> {
   const map = new Map<string, boolean>()
   const today = startOfDay(new Date())
 
